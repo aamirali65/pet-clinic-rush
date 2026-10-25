@@ -36,7 +36,7 @@ Chain cures without an angry customer to build a combo up to ×5.
 
 - **20 levels** with goals, time limits, tuning per level, and 1–3 star ratings.
 - **6 pets** — cat, dog, rabbit, hamster, bird and turtle — each with their own needs and moods.
-- **Shop with 19 upgrades**: extra beds and waiting chairs, more patient customers, faster tools, bigger coin payouts.
+- **Shop with 15 upgrades**: extra beds and waiting chairs, more patient customers, faster tools, bigger coin payouts, pet unlocks and clinic decorations.
 - **7-day daily gift** streak, tutorial, pause menu and settings.
 - **Saved progress** (coins, stars, best scores, unlocks, settings) with a versioned, migrating save format.
 - **Juice**: confetti, coin fly-to-HUD, popups, synthesized sound effects and haptic feedback on supported devices.
