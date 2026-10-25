@@ -1,0 +1,53 @@
+# Pet Clinic Rush – Architecture & Coding Rules
+# Never break the build. TypeScript strict, no `any` without a comment.
+# Data-driven content – no hardcoded magic numbers in logic.
+# Pooled objects in update loops – never allocate per-frame.
+# UI (Agent B) listens to events from gameplay (Agent A) only.
+# Audio, haptics, saving always go through events/service interfaces.
+
+# Project stack
+# - Phaser 3.90, TypeScript strict, Vite 8, ESLint, Prettier, Vitest
+# - Capacitor 8: core, android, haptics, preferences, app, status-bar, splash-screen
+# - Portrait virtual resolution 720 x 1280, Phaser.Scale.FIT, autoCenter
+# - Bundled OFL font: Baloo 2 (public/assets/fonts/Baloo2.ttf)
+# - Data-driven content in src/config/, no hardcoded content in scenes
+
+# Folder rules (src/*)
+# - src/contracts/* – shared types, events, asset keys (read-only for gameplay; changed via contract process)
+# - src/config/* – level/pet/need/customers/upgrades data (read-only for gameplay; Agent B writes)
+# - src/scenes/BootScene.ts, PreloadScene.ts, GameScene.ts – Agent A owns
+# - src/scenes/MenuScene.ts etc. – Agent B owns
+# - src/objects/** – Agent A owns
+# - src/systems/** – Agent A owns
+# - src/treatments/** – Agent A owns
+# - src/main.ts, src/config/gameConfig.ts – Agent A owns
+# - src/utils/pool.ts – Agent A owns
+# - src/utils/placeholders.ts – both (fallback generator)
+# - src/services/** – Agent B owns (AudioManager, SaveService, HapticsService, AdService)
+# - src/ui/** – Agent B owns
+
+# Event rules
+# - Gameplay EMITS: coins:changed, score:changed, hearts:changed, combo:changed,
+#   timer:tick, level:started, level:completed, level:failed, pet:cured,
+#   customer:angry, game:pause, game:resume, audio:play, haptic:pulse, tutorial:step
+# - UI LISTENS to the above never draws HUD itself
+# - Never import UI internals from gameplay
+
+# Build & test
+# - npm run typecheck must pass (no `any`, strict mode)
+# - npm run lint must pass (ESLint clean)
+# - npm run test must pass (Vitest)
+# - npm run dev must boot to menu; full level playable
+
+# Asset rules
+# - Free only (CC0 / CC-BY). Documented in ASSETS.md and CREDITS.md.
+# - If real asset missing, placeholder generator in src/utils/placeholders.ts keeps game playable.
+# - Loader prefers real files, falls back to generated placeholders.
+
+# Capacitor rules
+# - android/ is Agent B's domain; gameplay never touches android/ directly.
+# - cap:sync runs after build.
+
+# Magic-number ban
+# - All tunables must live in src/config/* or be passed as parameters.
+# - If you find a number that feels like a tunable, put it in config and import it.

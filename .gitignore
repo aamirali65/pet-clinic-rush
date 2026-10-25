@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.freebuff-logs/
+.freebuff/
+*.log
+
+# Android build artifacts
+android/.gradle/
+android/build/
+android/app/build/
+android/capacitor-cordova-android-plugins/build/
+android/.idea/
+android/local.properties
+android/app/release/
